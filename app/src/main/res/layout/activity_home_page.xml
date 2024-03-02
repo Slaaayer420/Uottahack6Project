@@ -12,6 +12,7 @@
         android:layout_height="57dp"
         android:layout_marginBottom="424dp"
         android:backgroundTint="#013378"
+        android:onClick="goToNewTripActivity"
         android:text="Start a new trip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
