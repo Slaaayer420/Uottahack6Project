@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 1500; // Splash screen duration in milliseconds
+    private final int SPLASH_DISPLAY_LENGTH = 1300; // Splash screen duration in milliseconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

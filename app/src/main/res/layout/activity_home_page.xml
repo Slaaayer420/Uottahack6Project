@@ -10,11 +10,12 @@
         android:id="@+id/button5"
         android:layout_width="261dp"
         android:layout_height="57dp"
-        android:layout_marginBottom="424dp"
+        android:layout_marginBottom="396dp"
         android:backgroundTint="#013378"
         android:text="Start a new trip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -30,6 +31,18 @@
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/kmRemainingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="You have this time of ride remaining"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="@+id/batteryCircleView"
+        app:layout_constraintStart_toStartOf="@+id/batteryCircleView"
+        app:layout_constraintTop_toBottomOf="@+id/batteryCircleView"
+        app:layout_constraintVertical_bias="0.296" />
 
     <TextView
         android:id="@+id/textView2"
@@ -125,12 +138,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="App Name"
+        android:text="E-Volve"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/bottomAppBar"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,12 +151,21 @@
         android:id="@+id/batteryCircleView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomAppBar"
-        app:layout_constraintVertical_bias="0.094" />
+        app:layout_constraintTop_toBottomOf="@+id/bottomAppBar" />
+
+    <ImageView
+        android:id="@+id/Setting_button"
+        android:layout_width="60dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_settings_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
