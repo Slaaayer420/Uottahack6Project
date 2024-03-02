@@ -17,7 +17,8 @@
             android:exported="false" />
         <activity
             android:name=".HomePageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="HomePageActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
