@@ -6,15 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".NewTripActivity">
 
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageButton
+        android:id="@+id/charging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:src="@drawable/baseline_charging_station_24"
+        tools:layout_editor_absoluteX="327dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <Button
         android:id="@+id/button3"
-        android:layout_width="404dp"
+        android:layout_width="425dp"
         android:layout_height="61dp"
-        android:layout_marginBottom="84dp"
-        android:backgroundTint="#013378"
         android:text="Where to?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="-7dp"
+        tools:layout_editor_absoluteY="578dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
