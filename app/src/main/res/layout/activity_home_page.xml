@@ -169,4 +169,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/white_settings_icon" />
 
+    <Switch
+        android:id="@+id/chargingSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Charging Mode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5"
+        app:layout_constraintVertical_bias="0.067" />
+
+    <TextView
+        android:id="@+id/batteryPercentageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Battery: 80%"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="135dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

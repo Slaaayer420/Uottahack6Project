@@ -1,60 +1,59 @@
 package com.example.uottahack6;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.os.Handler;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class HomePageActivity extends AppCompatActivity {
 
     private Vehicle vehicle;
     private TextView kmRemainingTextView;
-
+    private Handler handler = new Handler(); // Handler for periodic updates
+    // Runnable task for simulating charging
+    private Runnable runnableCode = new Runnable() {
+        @Override
+        public void run() {
+            if (vehicle.isCharging()) {
+                // Simulate 1 hour of charging
+                vehicle.updateBatteryLevel(1/60); // Assuming 1 hour has passed
+                // Repeat this runnable code again every hour
+                handler.postDelayed(this, 60000); // 3600000 milliseconds = 1 hour
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-
-        float batteryPercentage;
-        batteryPercentage=80;
-
         // Assuming you want to dynamically set or update the battery percentage
         BatteryCircleView batteryCircleView = findViewById(R.id.batteryCircleView);
-        batteryCircleView.setBatteryPercentage(batteryPercentage); // No need if it's already set to 80% by default
 
         // Initialize your Vehicle instance (example values)
-        vehicle = new Vehicle(batteryPercentage, 0.2); // 80% battery, 0.2 kWh/km consumption
-
-        // Example total kilometers that can be traveled on a full charge is 500 km
-        double totalKms = 500;
-        double remainingKms = vehicle.calculateRemainingKms(totalKms);
+        vehicle = new Vehicle(80, 0.2); // 80% battery, 0.2 kWh/km consumption
 
         kmRemainingTextView = findViewById(R.id.kmRemainingTextView);
-        // Update the TextView to show the remaining kilometers
-        String remainingKmsText = "You have " + remainingKms + " km of ride remaining";
-        kmRemainingTextView.setText(remainingKmsText);
 
-        findViewById(R.id.Setting_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomePageActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
+        findViewById(R.id.Setting_button).setOnClickListener(v -> {
+            Intent intent = new Intent(HomePageActivity.this, SettingsActivity.class);
+            startActivity(intent);
         });
 
+        // Initialize the charging switch setup
+        setupCharging();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        loadVehicleSettings(); // Call this method to update UI every time the HomePageActivity resumes
+        loadVehicleSettings();// Call this method to update UI every time the HomePageActivity resumes
+        updateUI();
     }
 
     private void loadVehicleSettings() {
@@ -71,10 +70,56 @@ public class HomePageActivity extends AppCompatActivity {
 
         // Update the battery circle view
         BatteryCircleView batteryCircleView = findViewById(R.id.batteryCircleView);
-        batteryCircleView.setBatteryPercentage((float) batteryPercentage);
+        batteryCircleView.setBatteryPercentage(batteryPercentage);
 
         // Update the TextView for remaining kilometers
         String remainingKmsText = "You have " + String.format("%.2f", remainingKms) + " km of ride remaining";
         kmRemainingTextView.setText(remainingKmsText);
     }
+
+    private void setupCharging() {
+        Switch chargingSwitch = findViewById(R.id.chargingSwitch);
+        BatteryCircleView batteryCircleView = findViewById(R.id.batteryCircleView);
+
+        vehicle.setBatteryLevelChangeListener(newBatteryLevel -> runOnUiThread(() -> batteryCircleView.setBatteryPercentage((float) newBatteryLevel)));
+
+        chargingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            vehicle.setCharging(isChecked);
+            if (isChecked) {
+                // Start the handler when the vehicle starts charging
+                handler.post(runnableCode);
+            } else {
+                // Stop the handler when the vehicle stops charging
+                handler.removeCallbacks(runnableCode);
+            }
+            updateUI();
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove callbacks to avoid memory leaks
+        handler.removeCallbacks(runnableCode);
+    }
+    private void updateUI() {
+        BatteryCircleView batteryCircleView = findViewById(R.id.batteryCircleView);
+        Switch chargingSwitch = findViewById(R.id.chargingSwitch);
+
+        if (chargingSwitch.isChecked()) {
+            // Vehicle is charging, display remaining charging time
+            double remainingTime = vehicle.calculateRemainingChargingTime();
+            kmRemainingTextView.setText(String.format("Time to full charge: %.2f hours", remainingTime));
+        } else {
+            // Vehicle not charging, display remaining kilometers
+            double totalKms = 500; // Example total range
+            double remainingKms = vehicle.calculateRemainingKms(totalKms);
+            kmRemainingTextView.setText(String.format("You have %.2f km of ride remaining", remainingKms));
+        }
+
+        // Update the battery circle view percentage
+        batteryCircleView.setBatteryPercentage((float) vehicle.getBatteryPercentage());
+    }
+
+
 }
