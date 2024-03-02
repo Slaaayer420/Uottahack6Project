@@ -8,9 +8,13 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="425dp"
+        android:layout_width="404dp"
         android:layout_height="61dp"
+        android:layout_marginBottom="84dp"
+        android:backgroundTint="#013378"
         android:text="Where to?"
-        tools:layout_editor_absoluteX="-7dp"
-        tools:layout_editor_absoluteY="581dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
