@@ -49,6 +49,13 @@ public class HomePageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.Notifications_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePageActivity.this, NotificationsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
     @Override

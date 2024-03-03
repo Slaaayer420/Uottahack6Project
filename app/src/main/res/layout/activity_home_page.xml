@@ -63,7 +63,7 @@
         app:srcCompat="@drawable/home_icon" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/Notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
@@ -168,5 +168,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/white_settings_icon" />
+
+    <Button
+        android:id="@+id/Notifications_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:width="5dp"
+        android:height="50dp"
+        android:alpha="0"
+        android:text="button"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
