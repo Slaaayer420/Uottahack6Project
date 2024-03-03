@@ -25,7 +25,10 @@ public class HomePageActivity extends AppCompatActivity {
                 handler.postDelayed(this, 60000); // 3600000 milliseconds = 1 hour
             }
         }
+
     };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,12 @@ public class HomePageActivity extends AppCompatActivity {
         vehicle = new Vehicle(80, 0.2); // 80% battery, 0.2 kWh/km consumption
 
         kmRemainingTextView = findViewById(R.id.kmRemainingTextView);
+
+        findViewById(R.id.button5).setOnClickListener(v -> {
+            Intent mainIntent = new Intent(HomePageActivity.this, NewTripActivity.class);
+            HomePageActivity.this.startActivity(mainIntent);
+            HomePageActivity.this.finish();
+        });
 
         findViewById(R.id.Setting_button).setOnClickListener(v -> {
             Intent intent = new Intent(HomePageActivity.this, SettingsActivity.class);
