@@ -3,14 +3,12 @@ package com.example.uottahack6;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
-
-import com.google.android.*;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -38,8 +36,7 @@ public class NewTripActivity extends AppCompatActivity implements OnMapReadyCall
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
@@ -64,8 +61,8 @@ public class NewTripActivity extends AppCompatActivity implements OnMapReadyCall
 
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(10 * 1000); // 10 seconds, in milliseconds
-        mLocationRequest.setFastestInterval(1 * 1000); // 1 second, in milliseconds
+        mLocationRequest.setInterval(10 * 1000);  // 10 seconds, in milliseconds
+        mLocationRequest.setFastestInterval(1 * 1000);  // 1 second, in milliseconds
 
         LocationCallback locationCallback = new LocationCallback() {
             @Override
@@ -77,8 +74,7 @@ public class NewTripActivity extends AppCompatActivity implements OnMapReadyCall
                     if (location != null) {
                         LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
-                        // You might want to add a marker at the user's location. Uncomment the line below if so.
-                        // mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
+                        mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
                     }
                 }
             }
@@ -94,7 +90,7 @@ public class NewTripActivity extends AppCompatActivity implements OnMapReadyCall
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 setupLocationUpdates();
             } else {
-                // Permission was denied. You can add a Toast or alert here to notify the user.
+                Toast.makeText(this, "Location permission is necessary for maps to function properly", Toast.LENGTH_SHORT).show();
             }
         }
     }
